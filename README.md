@@ -10,7 +10,7 @@ Simple debian packaging for Apache Karaf
 
 ```sh
 $ sudo apt-get update
-$ sudo apt-get install ruby-dev build-essential
+$ sudo apt-get install ruby ruby-dev build-essential
 $ sudo gem install fpm
 ```
 # Options
