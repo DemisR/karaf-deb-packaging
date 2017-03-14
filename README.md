@@ -15,7 +15,7 @@ $ sudo gem install fpm
 ```
 # Options
 
-You can change the karaf `version` and `java-jdk` in `dist_karaf.sh`.
+You can change the karaf `version` and `javajdk` in `dist_karaf.sh`.
 
 
 # Usage
@@ -92,3 +92,10 @@ Users:
 feature:install jolokia
 
 Default config http://hostname:8181/jolokia  karaf/karaf
+
+## Build debian package with docker-compose
+
+```
+docker-compose build
+docker-compose up
+```

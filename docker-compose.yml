@@ -1,0 +1,7 @@
+# docker-compose.yml
+demo:
+    build: .
+    command: /bin/bash ./dist_karaf.sh
+    volumes:
+        - .:/data
+    working_dir: /data

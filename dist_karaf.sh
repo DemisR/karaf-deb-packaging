@@ -8,7 +8,7 @@ name=karaf
 version=4.1.0
 package_version="-1"
 description="Apache Karaf is a modern and polymorphic container."
-java-jdk="oracle-java8-jdk" # or openjdk-8-jdk
+javajdk="oracle-java8-jdk" # or openjdk-8-jdk
 url="https://karaf.apache.org/"
 arch="all"
 section="misc"
@@ -68,13 +68,16 @@ fpm -t deb \
     --vendor "" \
     --license "${license}" \
     --config-files etc/karaf \
-    -m "${USER}@localhost" \
+    -m "karaf@localhost" \
     --prefix=/ \
-    -d ${java-jdk} \
+    -d ${javajdk} \
     --after-install ${origdir}/files/build/postinst \
     --before-remove ${origdir}/files/build/prerm \
     --after-remove ${origdir}/files/build/postrm \
     -s dir \
     -- .
-mv karaf*.deb ${origdir}
+mv karaf*.deb ${origdir}/package
 popd
+
+rm -r ${origdir}/tmp
+rm -r ${origdir}/${bin_package}
