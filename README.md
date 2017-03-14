@@ -3,43 +3,49 @@ karaf-deb-packaging
 
 Simple debian packaging for Apache Karaf with systemd
 
-### Changelog
+# Build debian package with docker-compose
 
+```
+docker-compose build
+docker-compose up
+```
 
-# Pre-requisites - Install fpm
+Debian package is build and moved in `package` folder.
+
+# Standard build
+## Pre-requisites - Install fpm
 
 ```sh
 $ sudo apt-get update
 $ sudo apt-get install ruby ruby-dev build-essential
 $ sudo gem install fpm
 ```
-# Options
+## Options
 
 You can change the karaf `version` and `javajdk` in `dist_karaf.sh`.
 
 
-# Usage
+## Usage
 
 ```sh
 $ ./dist_karaf.sh
 ```
 
-# Installation
+## Installation
 
 ```sh
+$ apt-get install oracle-java8-jdk
 $ dpkg -i karaf_4.1.0-1_all.deb
 ```
 
 or if you have your own repo:
 
 ```sh
-$ ~/gpg-agent-headless.sh
-$ reprepro -b /var/repositories/ includedeb trusty $@
 $ apt-get install karaf
 ```
 Note: Installs and runs as user `karaf`. Easy to change for your needs.
 
-## Post install
+# Post install
 
 To flag the application to start automatically on system boot use the following command:
 ```
@@ -92,10 +98,3 @@ Users:
 feature:install jolokia
 
 Default config http://hostname:8181/jolokia  karaf/karaf
-
-## Build debian package with docker-compose
-
-```
-docker-compose build
-docker-compose up
-```
