@@ -1,7 +1,7 @@
 karaf-deb-packaging
 ===================
 
-Simple debian packaging for Apache Karaf
+Simple debian packaging for Apache Karaf with systemd
 
 ### Changelog
 
@@ -15,7 +15,8 @@ $ sudo gem install fpm
 ```
 # Options
 
-You can change the karaf version in dist_karaf on new versions of both.
+You can change the karaf `version` and `java-jdk` in `dist_karaf.sh`.
+
 
 # Usage
 
@@ -26,7 +27,7 @@ $ ./dist_karaf.sh
 # Installation
 
 ```sh
-$ dpkg -i karaf_4.0.3-1_all.deb
+$ dpkg -i karaf_4.1.0-1_all.deb
 ```
 
 or if you have your own repo:
@@ -36,46 +37,37 @@ $ ~/gpg-agent-headless.sh
 $ reprepro -b /var/repositories/ includedeb trusty $@
 $ apt-get install karaf
 ```
-Note: Installs and runs as user 'karaf'. Easy to change for your needs.
+Note: Installs and runs as user `karaf`. Easy to change for your needs.
 
 ## Post install
 
-```sh
-
-$ sudo update-rc.d karaf defaults 25
-
- Adding system startup for /etc/init.d/karaf ...
-   /etc/rc0.d/K25karaf -> ../init.d/karaf
-   /etc/rc1.d/K25karaf -> ../init.d/karaf
-   /etc/rc6.d/K25karaf -> ../init.d/karaf
-   /etc/rc2.d/S25karaf -> ../init.d/karaf
-   /etc/rc3.d/S25karaf -> ../init.d/karaf
-   /etc/rc4.d/S25karaf -> ../init.d/karaf
-   /etc/rc5.d/S25karaf -> ../init.d/karaf
+To flag the application to start automatically on system boot use the following command:
+```
+systemctl enable karaf.service
 ```
 
 ### Connect to instance
+
 ```sh
 ssh -p 8101 karaf@localhost
 ```
 
 ## Tested Platforms
 
-* Debian Wheezy
+* Debian Jessie
 
 ---
 
 ## Package info
-Debian pkg: `karaf_4.0.3-1_all.deb`
+Debian pkg: `karaf_4.1.0-1_all.deb`
 Version :
-  - karaf 4.0.3
+  - karaf 4.1.0
 
-Init scripts:
-  - /etc/init.d/karaf
+Service file:
+  - /lib/systemd/system/karaf.service
 
 Configuration:
   - /etc/karaf
-  - /etc/default/karaf
 
 Logs:
   - /usr/local/karaf/data/log/
@@ -85,7 +77,7 @@ Binaries:
   - /usr/local/karaf/bin/
 
 Data:
-  - /usr/local/karaf/data
+  - /var/lib/karaf/data
 
 Network ports:
   - karaf shell: 8101

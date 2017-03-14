@@ -27,6 +27,8 @@ case "$1" in
         ;;
 
     remove|upgrade|abort-upgrade|abort-remove|abort-deconfigure)
+        deb-systemd-helper update-state
+        rm -rf /usr/local/karaf
         ;;
 
     *)

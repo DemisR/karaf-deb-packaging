@@ -35,9 +35,11 @@ create_karaf_user_group() {
 
 chown_karaf_dirs() {
     chown -R $USER:$GROUP /etc/karaf
+    chown -R $USER:$GROUP /var/lib/karaf
     chown $USER:$GROUP /var/log/karaf
     chown -R $USER:$GROUP /usr/local/karaf
-    chmod 755 /usr/local/karaf/bin/karaf.service
+    chmod 755 /lib/systemd/system/karaf.service
+    chmod 755 /lib/systemd/system/karaf@.service
     if [ -d "/usr/local/karaf/etc" ]; then
       mv /usr/local/karaf/etc/* /etc/karaf/
       rmdir /usr/local/karaf/etc
@@ -50,6 +52,8 @@ case "$1" in
     configure)
         create_karaf_user_group
         chown_karaf_dirs
+        deb-systemd-helper enable karaf.service
+        systemctl start karaf.service
         ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

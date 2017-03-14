@@ -1,0 +1,36 @@
+#!/bin/sh
+# prerm script for karaf
+# Based on script found in https://github.com/sensu/sensu-build/blob/master/pkg_scripts/deb/prerm
+# (changed from init.d to systemd)
+#
+
+set -e
+
+# summary of how this script can be called and ordering:
+#  http://www.debian.org/doc/debian-policy/ch-maintainerscripts.html
+#  http://www.proulx.com/~bob/debian/hints/DpkgScriptOrder
+
+
+# try to stop any running karaf services
+stop_karaf_service() {
+    systemctl stop karaf.service
+
+    # some time for karaf services to stop
+    sleep 2
+}
+
+case "$1" in
+    remove|purge)
+        stop_karaf_service
+        ;;
+
+    upgrade|deconfigure)
+        ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
