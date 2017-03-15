@@ -5,7 +5,7 @@ set -u
 
 ### Options ###
 name=karaf
-version=4.1.0
+version=4.0.8
 package_version="-1"
 description="Apache Karaf is a modern and polymorphic container."
 javajdk="oracle-java8-jdk" # or openjdk-8-jdk
