@@ -3,11 +3,19 @@ karaf-deb-packaging
 
 Simple debian packaging for Apache Karaf with systemd
 
-# Build debian package with docker-compose
+# Build debian package  with docker
+
+```
+docker build -t karafbuilder .
+docker run --name karaf_build_$(date "+%s") -v $(pwd):/build -w /build karafbuilder /bin/bash -c "./build_karaf_package.sh"
+```
+
+
+Or use docker-compose
 
 ```
 docker-compose build
-docker-compose up
+docker-compose start
 ```
 
 Debian package is build and moved in `package` folder.
@@ -22,13 +30,13 @@ $ sudo gem install fpm
 ```
 ## Options
 
-You can change the karaf `version` and `javajdk` in `dist_karaf.sh`.
+You can change the karaf `version` and `javajdk` in `build_karaf_package.sh`.
 
 
 ## Usage
 
 ```sh
-$ ./dist_karaf.sh
+$ ./build_karaf_package.sh
 ```
 
 ## Installation
