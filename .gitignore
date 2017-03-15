@@ -3,4 +3,4 @@ tmp
 *.tgz
 *.tar.gz
 Test
-package/*
+package/*.deb
