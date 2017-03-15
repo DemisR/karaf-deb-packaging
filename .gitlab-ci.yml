@@ -1,0 +1,11 @@
+stages:
+  - build
+
+makedeb:
+  stage: build
+  script:
+    - docker build -t karafbuilder .
+    - docker run --name karaf_build_$(date "+%s") -v $(pwd):/build -w /build karafbuilder /bin/bash -c "./build_karaf_package.sh"
+  artifacts:
+    paths:
+      - package/*.deb
