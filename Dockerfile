@@ -38,3 +38,9 @@ RUN apt-get update && apt-get install -y \
     oracle-java8-jdk && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+ADD files /build/files
+ADD build_karaf_package.sh /build/build_karaf_package.sh
+
+WORKDIR /build
+ENTRYPOINT ["/build/build_karaf_package.sh"]
