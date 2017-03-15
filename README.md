@@ -7,15 +7,7 @@ Simple debian packaging for Apache Karaf with systemd
 
 ```
 docker build -t karafbuilder .
-docker run --name karaf_build_$(date "+%s") -v $(pwd):/build -w /build karafbuilder /bin/bash -c "./build_karaf_package.sh"
-```
-
-
-Or use docker-compose
-
-```
-docker-compose build
-docker-compose start
+docker run --name karaf_build_$(date "+%s") -v $(pwd)/package:/build/package  karafbuilder
 ```
 
 Debian package is build and moved in `package` folder.
